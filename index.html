@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yandex Eats kuryeri bo‘ling — har hafta to‘lov, erkin jadval</title>
+<meta name="description" content="Yandex Eats’da kuryer bo‘lib ishlang: oyiga 15 mln so‘mgacha, har hafta to‘lov, erkin jadval. Ro‘yxatdan o‘tish Telegram-botda 3 daqiqa.">
+<meta name="theme-color" content="#FCE000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yandex Eats kuryeri bo‘ling">
+<meta property="og:description" content="Oyiga 15 mln so‘mgacha · har hafta to‘lov · erkin jadval">
+<meta property="og:image" content="assets/hero.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FCE000'/%3E%3Cpath d='M18 40h28M22 40l3-14h14l3 14M28 26v-5h8v5' fill='none' stroke='%23111' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --y:#FCE000;
+  --y-deep:#F5C400;
+  --ink:#141414;
+  --ink-2:#55534E;
+  --ink-3:#8B8881;
+  --bg:#F4F2EE;
+  --card:#FFFFFF;
+  --line:#E4E1DA;
+  --r-xl:36px;
+  --r-lg:26px;
+  --r-md:18px;
+  --wrap:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--ink);
+  font-size:17px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-weight:800;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(34px,5.2vw,60px)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:#1DB954;box-shadow:0 0 0 4px rgba(29,185,84,.18)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  height:64px;padding:0 30px;border-radius:20px;
+  font-weight:700;font-size:18px;letter-spacing:-.01em;white-space:nowrap;
+  transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.btn svg{width:24px;height:24px;flex:none}
+.btn--ink{background:var(--ink);color:#fff}
+.btn--ink:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(0,0,0,.55)}
+.btn--y{background:var(--y);color:var(--ink)}
+.btn--y:hover{background:#FFE92E;transform:translateY(-2px)}
+.btn--ghost{height:64px;padding:0 22px;font-weight:600;color:var(--ink);border-radius:20px}
+.btn--ghost:hover{background:rgba(0,0,0,.06)}
+.btn--sm{height:46px;padding:0 18px;font-size:15px;border-radius:14px}
+.btn:active{transform:scale(.98)}
+
+/* ---------- header ---------- */
+.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(244,242,238,.86);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .2s;
+}
+.top.is-stuck{border-color:var(--line)}
+.top__in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.03em;font-size:19px;line-height:1.05}
+.brand__mark{
+  width:42px;height:42px;border-radius:13px;background:var(--y);
+  display:grid;place-items:center;flex:none;
+}
+.brand__mark svg{width:24px;height:24px}
+.brand small{display:block;font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--ink-3);margin-top:3px}
+.top__right{display:flex;align-items:center;gap:10px}
+.lang{display:flex;padding:4px;border-radius:14px;background:#E9E6DF}
+.lang button{
+  height:38px;padding:0 13px;border-radius:10px;font-size:14px;font-weight:700;color:var(--ink-2);
+  transition:background .15s,color .15s;
+}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+
+/* ---------- hero ---------- */
+.hero{padding:34px 0 0}
+.hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(44px,6.6vw,88px);font-weight:900;letter-spacing:-.045em;line-height:.96;margin:22px 0 24px}
+.hero h1 mark{
+  background:var(--y);color:inherit;padding:0 .16em .04em;border-radius:.2em;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+}
+.hero__sub{font-size:20px;line-height:1.45;color:var(--ink-2);max-width:520px}
+.hero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:34px}
+.hero__note{margin-top:14px;font-size:14px;color:var(--ink-3)}
+
+.shot{position:relative}
+.shot__frame{
+  position:relative;overflow:hidden;border-radius:var(--r-xl);
+  aspect-ratio:485/585;background:#D9D6CE;
+}
+.shot__frame img{width:100%;height:100%;object-fit:cover}
+.shot__frame::after{content:"";position:absolute;inset:auto 0 0 0;height:36%;background:linear-gradient(to top,rgba(0,0,0,.42),transparent)}
+.chip{
+  position:absolute;z-index:2;background:#fff;border-radius:20px;padding:14px 18px;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.4);
+  font-weight:700;line-height:1.15;letter-spacing:-.02em;
+}
+.chip small{display:block;font-size:12.5px;font-weight:600;color:var(--ink-3);letter-spacing:0;margin-bottom:4px}
+.chip b{font-size:26px;font-weight:800}
+.chip--pay{left:-28px;bottom:74px}
+.chip--time{right:18px;bottom:22px;background:var(--ink);color:#fff;display:flex;align-items:center;gap:12px;font-size:15px}
+.chip--time svg{width:26px;height:26px;color:var(--y)}
+.sticker{
+  position:absolute;z-index:3;top:-18px;right:-14px;width:112px;height:112px;border-radius:50%;
+  background:var(--ink);color:var(--y);display:grid;place-items:center;text-align:center;
+  transform:rotate(12deg);font-weight:800;line-height:1;
+  box-shadow:0 0 0 6px var(--bg);
+}
+.sticker b{font-size:40px;letter-spacing:-.04em;display:block}
+.sticker span{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#fff;display:block;margin-top:4px}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:56px}
+.fact{background:var(--card);border-radius:var(--r-lg);padding:22px 22px 20px}
+.fact b{display:block;font-size:34px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.fact span{display:block;margin-top:8px;font-size:15px;color:var(--ink-2);line-height:1.3}
+
+/* ---------- ticker ---------- */
+.ticker{margin-top:64px;background:var(--ink);color:#fff;overflow:hidden;padding:20px 0;transform:rotate(-1.2deg) scale(1.02)}
+.ticker__track{display:flex;width:max-content;animation:slide 38s linear infinite}
+.ticker__track span{
+  display:inline-flex;align-items:center;gap:26px;padding-right:26px;
+  font-size:24px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;
+}
+.ticker__track span::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--y)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{padding:104px 0 0}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:40px}
+.head p{max-width:400px;color:var(--ink-2);font-size:18px}
+
+/* income */
+.income{background:var(--ink);color:#fff;border-radius:var(--r-xl);padding:54px;display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
+.income h2{color:#fff}
+.income h2 em{font-style:normal;color:var(--y)}
+.income__lead{margin-top:20px;color:#B9B6AE;font-size:18px;max-width:340px}
+.income__tag{
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
+  border:1px solid #3A3936;border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600;color:#D8D5CC;
+}
+.income__tag svg{width:16px;height:16px;color:var(--y)}
+.rows{display:grid;gap:8px;align-content:center}
+.row{
+  position:relative;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:18px;
+  padding:20px 22px;border-radius:22px;background:#1F1F1E;overflow:hidden;
+}
+.row::before{
+  content:"";position:absolute;inset:0 auto 0 0;width:calc(var(--w) * 1%);
+  background:linear-gradient(90deg,rgba(252,224,0,.16),rgba(252,224,0,.05));
+  transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.8,.2,1);
+}
+.in .row::before{transform:scaleX(1)}
+.row:nth-child(2)::before{transition-delay:.08s}
+.row:nth-child(3)::before{transition-delay:.16s}
+.row:nth-child(4)::before{transition-delay:.24s}
+.row > *{position:relative}
+.row__ic{width:52px;height:52px;border-radius:16px;background:var(--y);color:var(--ink);display:grid;place-items:center}
+.row__ic svg{width:28px;height:28px}
+.row__name{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.row__sum{text-align:right;font-size:15px;color:#B9B6AE;white-space:nowrap}
+.row__sum b{font-size:44px;font-weight:800;letter-spacing:-.05em;color:var(--y);line-height:1;margin-right:6px}
+.income__fine{grid-column:1/-1;margin-top:-26px;font-size:14px;color:#8B8881}
+
+/* perks */
+.perks{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.perk{background:var(--card);border-radius:var(--r-lg);padding:30px;grid-column:span 2;min-height:232px;display:flex;flex-direction:column}
+.perk svg{width:36px;height:36px;margin-bottom:auto}
+.perk h3{font-size:24px;margin:28px 0 8px;letter-spacing:-.03em;line-height:1.1}
+.perk p{color:var(--ink-2);font-size:16px;line-height:1.4}
+.perk--wide{grid-column:span 3}
+.perk--y{background:var(--y)}
+.perk--y p{color:#3B3600}
+.perk--bike{
+  grid-column:span 3;background:var(--card);border:2px dashed var(--ink);
+  position:relative;overflow:hidden;
+}
+.perk--bike .pill{
+  align-self:flex-start;background:var(--ink);color:#fff;border-radius:999px;
+  padding:7px 14px;font-size:13px;font-weight:700;letter-spacing:.02em;margin-top:16px;
+}
+.perk--bike .pct{
+  position:absolute;right:-14px;top:-34px;font-size:190px;font-weight:900;letter-spacing:-.06em;
+  color:var(--y);line-height:1;pointer-events:none;
+}
+.perk--bike > *:not(.pct){position:relative}
+
+/* steps */
+.steps{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:center}
+.steps ol{list-style:none;display:grid;gap:12px}
+.steps li{
+  display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:start;
+  background:var(--card);border-radius:var(--r-lg);padding:26px;
+}
+.steps li > b{
+  width:64px;height:64px;border-radius:20px;background:var(--y);
+  display:grid;place-items:center;font-size:30px;font-weight:800;letter-spacing:-.04em;
+}
+.steps li h3{font-size:23px;letter-spacing:-.03em;margin:4px 0 6px;line-height:1.12}
+.steps li p{color:var(--ink-2);font-size:16px;line-height:1.42}
+.steps__cta{margin-top:22px}
+
+.phone{
+  background:var(--ink);border-radius:46px;padding:12px;
+  box-shadow:0 40px 70px -40px rgba(0,0,0,.6);transform:rotate(2.2deg);
+}
+.phone__scr{background:#E7EBF0;border-radius:36px;overflow:hidden;font-size:14.5px;line-height:1.35}
+.phone__bar{background:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #DDE1E6}
+.phone__ava{width:40px;height:40px;border-radius:50%;background:var(--y);display:grid;place-items:center;flex:none}
+.phone__ava svg{width:22px;height:22px}
+.phone__bar b{display:block;font-size:15.5px;letter-spacing:-.01em}
+.phone__bar small{color:#3A9CE0;font-size:12.5px}
+.chat{padding:16px 12px 18px;display:grid;gap:8px}
+.msg{background:#fff;border-radius:16px 16px 16px 5px;padding:10px 13px;max-width:86%;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.msg--me{justify-self:end;background:#DCF8C6;border-radius:16px 16px 5px 16px}
+.msg--img{padding:5px;width:150px}
+.msg--img div{
+  height:104px;border-radius:12px;background:#fff;border:1px solid #D7DCD0;
+  display:grid;align-content:center;gap:7px;padding:0 14px;
+}
+.msg--img div i{height:7px;border-radius:4px;background:#D9DED2;display:block}
+.msg--img div i:first-child{width:36px;height:36px;border-radius:50%;background:#35C063;margin-bottom:2px}
+.msg--img div i:last-child{width:62%}
+.kb{display:grid;gap:5px;max-width:86%}
+.kb span{background:rgba(72,92,112,.42);color:#fff;border-radius:9px;text-align:center;padding:9px;font-weight:600;font-size:13.5px}
+.kb--2{grid-template-columns:1fr 1fr}
+
+/* needs */
+.needs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.need{background:var(--card);border-radius:var(--r-lg);padding:24px;min-height:176px;display:flex;flex-direction:column;justify-content:space-between;gap:22px}
+.need svg{width:32px;height:32px}
+.need b{display:block;font-size:19px;letter-spacing:-.025em;line-height:1.15}
+.need span{display:block;margin-top:6px;font-size:14.5px;color:var(--ink-2);line-height:1.35}
+
+/* cities */
+.cities{display:flex;flex-wrap:wrap;gap:10px}
+.cities li{
+  list-style:none;font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-.035em;
+  padding:14px 26px;border-radius:999px;background:var(--card);
+}
+.cities li:nth-child(1),.cities li:nth-child(2){background:var(--y)}
+.cities__note{margin-top:18px;color:var(--ink-3);font-size:15px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:48px;align-items:start}
+.faq__list{display:grid;gap:8px}
+details{background:var(--card);border-radius:22px;padding:0 26px}
+summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:22px 0;font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.25;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"";flex:none;width:34px;height:34px;border-radius:50%;background:var(--bg);
+  background-image:linear-gradient(var(--ink),var(--ink)),linear-gradient(var(--ink),var(--ink));
+  background-size:13px 2px,2px 13px;background-position:center;background-repeat:no-repeat;
+  transition:transform .2s, background-color .2s;
+}
+details[open] summary::after{transform:rotate(45deg);background-color:var(--y)}
+details p{padding:0 54px 24px 0;color:var(--ink-2);font-size:16.5px}
+.faq aside p{color:var(--ink-2);margin:16px 0 22px;font-size:18px}
+
+/* final */
+.final{
+  background:var(--y);border-radius:var(--r-xl);padding:72px 54px;text-align:center;position:relative;overflow:hidden;
+}
+.final h2{font-size:clamp(38px,6.4vw,84px);font-weight:900;letter-spacing:-.045em;max-width:900px;margin:0 auto}
+.final p{margin:20px auto 34px;font-size:20px;max-width:520px;color:#3B3600}
+.final .btn{height:72px;padding:0 38px;font-size:20px;border-radius:22px}
+
+footer{padding:44px 0 120px;color:var(--ink-3);font-size:14px;line-height:1.5}
+.foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.foot p{max-width:620px}
+.foot a{color:var(--ink);font-weight:600;border-bottom:1px solid var(--line)}
+
+/* mobile dock */
+.dock{
+  position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;
+  display:none;transform:translateY(140%);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.dock.show{transform:none}
+.dock .btn{width:100%;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:1020px){
+  .hero__grid{grid-template-columns:1fr;gap:44px}
+  .shot{max-width:520px;margin:0 auto;width:100%}
+  .chip--pay{left:-8px}
+  .sticker{right:-6px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .income{grid-template-columns:1fr;gap:34px;padding:40px}
+  .income__fine{margin-top:-10px}
+  .perk,.perk--wide,.perk--bike{grid-column:span 3}
+  .steps{grid-template-columns:1fr}
+  .phone{max-width:360px;margin:0 auto;width:100%}
+  .needs{grid-template-columns:repeat(3,1fr)}
+  .faq{grid-template-columns:1fr;gap:28px}
+  .head{flex-direction:column;align-items:flex-start;gap:14px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .top__in{height:62px}
+  .brand{font-size:16.5px;gap:10px}
+  .brand__mark{width:38px;height:38px;border-radius:12px}
+  .top .btn{display:none}
+  .hero{padding-top:18px}
+  .hero h1{margin:16px 0 18px}
+  .hero__sub{font-size:17.5px}
+  .hero__cta{margin-top:26px}
+  .hero__cta .btn--ink{width:100%}
+  .hero__cta .btn--ghost{width:100%;height:52px}
+  .chip{padding:11px 14px;border-radius:16px}
+  .chip b{font-size:21px}
+  .chip--pay{left:10px;bottom:76px}
+  .chip--time{right:10px;bottom:14px;font-size:13.5px}
+  .sticker{width:88px;height:88px;top:-14px;right:6px}
+  .sticker b{font-size:31px}
+  .sticker span{font-size:9px}
+  .facts{gap:8px;margin-top:36px}
+  .fact{padding:18px 16px;border-radius:20px}
+  .fact b{font-size:27px}
+  .fact span{font-size:13.5px}
+  .ticker{margin-top:44px;padding:15px 0}
+  .ticker__track span{font-size:19px}
+  section{padding-top:72px}
+  .head{margin-bottom:26px}
+  .head p{font-size:16.5px}
+  .income{padding:26px 16px 28px;border-radius:28px;margin:0 -4px}
+  .income__lead{font-size:16.5px}
+  .row{grid-template-columns:44px 1fr auto;gap:12px;padding:14px;border-radius:18px}
+  .row__ic{width:44px;height:44px;border-radius:13px}
+  .row__ic svg{width:24px;height:24px}
+  .row__name{font-size:16px}
+  .row__sum{font-size:12.5px}
+  .row__sum b{font-size:32px;margin-right:4px}
+  .perks{gap:8px}
+  .perk,.perk--wide,.perk--bike{grid-column:span 6;min-height:0;padding:24px}
+  .perk h3{margin-top:22px;font-size:22px}
+  .perk--bike .pct{font-size:150px}
+  .steps li{grid-template-columns:52px 1fr;gap:14px;padding:20px 18px}
+  .steps li > b{width:52px;height:52px;border-radius:16px;font-size:25px}
+  .steps li h3{font-size:20px}
+  .steps__cta .btn{width:100%}
+  .needs{grid-template-columns:repeat(2,1fr);gap:8px}
+  .need{padding:18px;min-height:150px}
+  .need:last-child{grid-column:span 2;min-height:0}
+  .need b{font-size:17px}
+  .cities{gap:7px}
+  .cities li{padding:10px 18px}
+  details{padding:0 18px;border-radius:18px}
+  summary{font-size:17px;padding:18px 0}
+  details p{padding-right:0;font-size:15.5px}
+  .final{padding:52px 20px;border-radius:28px}
+  .final p{font-size:17.5px}
+  .final .btn{width:100%;height:66px;font-size:18px;padding:0 16px}
+  .dock{display:block}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .row::before{transform:scaleX(1)}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 3.5 2.9 10.7c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8L22.9 5c.3-1.3-.5-1.9-1.3-1.5ZM9.3 13.4l8.6-5.4c.4-.3.8-.1.5.2l-7.1 6.4-.3 3.3-1.7-4.5Z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16h16M6.5 16 8 8h8l1.5 8M10 8V5.5h4V8"/></symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4.5" r="1.8"/><path d="m9.5 21 2-5.5-2-2.5 1.5-5 3 2.5 3 1M11 8 7.5 9.5 7 12.5M13.5 15.5l2 2 .5 3.5"/></symbol>
+    <symbol id="i-bike" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="16.5" r="3.5"/><circle cx="18.5" cy="16.5" r="3.5"/><path d="m5.5 16.5 3.5-8h5.5l4 8M9 8.5l3.5 8h6M8 6h3M14.5 8.5 15.5 6h2"/></symbol>
+    <symbol id="i-ebike" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M5 17h8l3-9h2.5M8 17l1-5h4.5M7.5 12H11"/><path d="m13 3-2 3.5h3L12 10" stroke-width="1.8"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 16.5v-4l2-5.5h13l2 5.5v4M3.5 12.5h17M3.5 16.5h17v2.5h-3v-2.5M6.5 16.5V19h-3v-2.5"/><path d="M7 14.5h.01M17 14.5h.01" stroke-width="2.6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5v10a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-13a2 2 0 0 1 0-4h11v4"/><path d="M16.5 14h.01" stroke-width="2.8"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v11H11l-4.5 3.5v-3.5H4z"/><path d="m8.5 8.5 7 5M15.5 8.5l-7 5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9l-5.2 2.8 1-5.9L3.5 9.700l5.9-.8z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.800 12 21 12 21Z"/><circle cx="12" cy="9.500" r="2.500"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2.500 9.500 9.500-4.500 9.500 4.500-9.500 4.500z"/><path d="M6.500 11.500v4.500c1.500 1.500 3.300 2.200 5.500 2.200s4-.7 5.500-2.200v-4.500M21.500 9.500v5"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.500"/><circle cx="8.500" cy="11" r="2"/><path d="M5.500 16c.6-1.300 1.600-2 3-2s2.400.7 3 2M14.500 10h4M14.500 13.500h4"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.500" width="18" height="13" rx="2.500"/><path d="M3 10h18M6.500 15h3.500"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6.500" y="2.500" width="11" height="19" rx="2.500"/><path d="M10.500 18.500h3"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.500h8l4 4v13H6z"/><path d="M14 3.500v4h4M9 12.500l2 2 4-4"/></symbol>
+    <symbol id="i-18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M7.500 10 9 9v6M14.300 12a1.600 1.600 0 1 0 0-3.200 1.600 1.600 0 0 0 0 3.200Zm0 0a1.700 1.700 0 1 0 0 3.400 1.700 1.700 0 0 0 0-3.400Z" stroke-width="1.700"/></symbol>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap top__in">
+    <a class="brand" href="#">
+      <span class="brand__mark"><svg><use href="#i-bag"/></svg></span>
+      <span>Kuryer<small data-i18n="brand_sub">Yandex Eats hamkori</small></span>
+    </a>
+    <div class="top__right">
+      <div class="lang" role="group" aria-label="Til / Язык">
+        <button type="button" data-lang="uz" aria-pressed="true">O‘Z</button>
+        <button type="button" data-lang="ru" aria-pressed="false">РУ</button>
+      </div>
+      <a class="btn btn--ink btn--sm js-bot" href="https://t.me/yandexkuryer_bot?start=uz" target="_blank" rel="noopener">
+        <svg><use href="#i-tg"/></svg><span data-i18n="cta_short">Ariza qoldirish</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <span class="eyebrow"><i></i><span data-i18n="eyebrow">Kuryerlar qabuli ochiq</span></span>
+        <h1 data-i18n="h1">Ovqat yetkaz — <mark>har hafta</mark> daromad ol</h1>
+        <p class="hero__sub" data-i18n="sub">Yandex Eats’da kuryer bo‘ling. Jadvalni o‘zingiz tuzasiz, suhbat yo‘q, tajriba shart emas.</p>
+        <div class="hero__cta">
+          <a class="btn btn--ink js-bot" href="https://t.me/yandexkuryer_bot?start=uz" target="_blank" rel="noopener">
+            <svg><use href="#i-tg"/></svg><span data-i18n="cta">Telegramda boshlash</span>
+          </a>
+          <a class="btn btn--ghost" href="#income" data-i18n="cta2">Daromadni ko‘rish ↓</a>
+        </div>
+        <p class="hero__note" data-i18n="note">Ro‘yxatdan o‘tish bepul va 3 daqiqa oladi</p>
+      </div>
+
+      <div class="shot">
+        <div class="sticker"><div><b>18+</b><span data-i18n="sticker">yoshdan</span></div></div>
+        <div class="shot__frame">
+          <img src="assets/hero.jpg" width="485" height="585" alt="Yandex Eats kuryerlari" data-i18n-alt="alt">
+        </div>
+        <div class="chip chip--pay"><small data-i18n="chip_pay_s">Avtokuryer, oyiga</small><b data-i18n="chip_b">15 mln</b> <span data-i18n="chip_pay">so‘mgacha</span></div>
+        <div class="chip chip--time"><svg><use href="#i-clock"/></svg><span data-i18n="chip_time">Jadval —<br>o‘zingizniki</span></div>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact rv"><b data-i18n="f1b">Har hafta</b><span data-i18n="f1">to‘lov kartangizga tushadi</span></div>
+      <div class="fact rv"><b>0%</b><span data-i18n="f2">biz hech qanday foiz olmaymiz</span></div>
+      <div class="fact rv"><b data-i18n="f3b">3 daqiqa</b><span data-i18n="f3">ro‘yxatdan o‘tish uchun</span></div>
+      <div class="fact rv"><b data-i18n="f4b">8 shahar</b><span data-i18n="f4">O‘zbekiston bo‘ylab</span></div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track" id="ticker">
+      <span>Toshkent</span><span>Samarqand</span><span>Namangan</span><span>Farg‘ona</span><span>Andijon</span><span>Buxoro</span><span>Navoiy</span><span>Urganch</span>
+    </div>
+  </div>
+</div>
+
+<section id="income">
+  <div class="wrap">
+    <div class="income rv">
+      <div>
+        <span class="income__tag"><svg><use href="#i-pin"/></svg><span data-i18n="inc_tag">Toshkent bo‘yicha</span></span>
+        <h2 data-i18n="inc_h">Oyiga <em>15 mln</em> so‘mgacha</h2>
+        <p class="income__lead" data-i18n="inc_lead">Daromad transportga va bajarilgan buyurtmalar soniga bog‘liq. Qancha ko‘p yetkazsangiz — shuncha ko‘p olasiz.</p>
+      </div>
+      <div class="rows">
+        <div class="row" style="--w:40">
+          <span class="row__ic"><svg><use href="#i-walk"/></svg></span>
+          <span class="row__name" data-i18n="t_walk">Piyoda</span>
+          <span class="row__sum"><span data-i18n="upto"></span><b>6</b><span data-i18n="mln">mln gacha</span></span>
+        </div>
+        <div class="row" style="--w:53">
+          <span class="row__ic"><svg><use href="#i-bike"/></svg></span>
+          <span class="row__name" data-i18n="t_bike">Velosiped</span>
+          <span class="row__sum"><span data-i18n="upto"></span><b>8</b><span data-i18n="mln">mln gacha</span></span>
+        </div>
+        <div class="row" style="--w:73">
+          <span class="row__ic"><svg><use href="#i-ebike"/></svg></span>
+          <span class="row__name" data-i18n="t_ebike">Elektrovelosiped</span>
+          <span class="row__sum"><span data-i18n="upto"></span><b>11</b><span data-i18n="mln">mln gacha</span></span>
+        </div>
+        <div class="row" style="--w:100">
+          <span class="row__ic"><svg><use href="#i-car"/></svg></span>
+          <span class="row__name" data-i18n="t_car">Avtomobil</span>
+          <span class="row__sum"><span data-i18n="upto"></span><b>15</b><span data-i18n="mln">mln gacha</span></span>
+        </div>
+      </div>
+      <p class="income__fine" data-i18n="inc_fine">So‘mda, oyiga. Boshqa shaharlarda raqamlar farq qilishi mumkin.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv">
+      <h2 data-i18n="perks_h">Nega kuryerlar<br>bizni tanlaydi</h2>
+      <p data-i18n="perks_p">Boshliq yo‘q, smena yo‘q, majburiy soatlar yo‘q. Ilovani ochdingiz — ish boshlandi.</p>
+    </div>
+    <div class="perks">
+      <div class="perk perk--y rv">
+        <svg><use href="#i-clock"/></svg>
+        <h3 data-i18n="p1h">Jadvalni o‘zingiz belgilaysiz</h3>
+        <p data-i18n="p1">Ertalab, kechqurun yoki faqat dam olish kunlari — qachon qulay bo‘lsa.</p>
+      </div>
+      <div class="perk rv">
+        <svg><use href="#i-wallet"/></svg>
+        <h3 data-i18n="p2h">Har hafta to‘lov</h3>
+        <p data-i18n="p2">Pul Uzcard yoki Humo kartangizga tushadi. Komissiya va foizlarsiz.</p>
+      </div>
+      <div class="perk rv">
+        <svg><use href="#i-chat"/></svg>
+        <h3 data-i18n="p3h">Suhbatsiz</h3>
+        <p data-i18n="p3">Ofisga borish va rezyume shart emas. Hammasi onlayn.</p>
+      </div>
+      <div class="perk perk--wide rv">
+        <svg><use href="#i-cap"/></svg>
+        <h3 data-i18n="p4h">Talabamisiz? Juda mos</h3>
+        <p data-i18n="p4">Darsdan bo‘sh vaqtingizda ishlab, mustaqil daromad toping. Tajriba talab qilinmaydi — hammasini ilova ko‘rsatadi.</p>
+      </div>
+      <div class="perk perk--bike rv">
+        <span class="pct" aria-hidden="true">%</span>
+        <svg><use href="#i-ebike"/></svg>
+        <h3 data-i18n="p5h">Elektrovelosiped ijarasiga chegirma</h3>
+        <p data-i18n="p5">Transportingiz bo‘lmasa ham boshlash mumkin — elektrovelosipedni ijaraga oling.</p>
+        <span class="pill" data-i18n="p5pill">Toshkent va Samarqandda</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 data-i18n="steps_h">Uch qadamda<br>ish boshlang</h2>
+      <p data-i18n="steps_p">Hammasi Telegram-bot orqali. Savol tug‘ilsa — o‘sha chatning o‘zida menejer javob beradi.</p>
+    </div>
+    <div class="steps">
+      <div>
+        <ol>
+          <li class="rv"><b>1</b><div><h3 data-i18n="s1h">Botni oching va tilni tanlang</h3><p data-i18n="s1">Bot shartlar, daromad va talablar haqida qisqacha aytib beradi.</p></div></li>
+          <li class="rv"><b>2</b><div><h3 data-i18n="s2h">Anketani to‘ldiring</h3><p data-i18n="s2">«Kuryer bo‘lish» tugmasi Yandex Eats’ning rasmiy ro‘yxatdan o‘tish sahifasini ochadi. 3 daqiqa.</p></div></li>
+          <li class="rv"><b>3</b><div><h3 data-i18n="s3h">Skrinshotni botga yuboring</h3><p data-i18n="s3">Unda sana, vaqt va manzil ko‘rinib tursin. Menejer tekshirib, siz bilan bog‘lanadi.</p></div></li>
+        </ol>
+        <div class="steps__cta rv">
+          <a class="btn btn--ink js-bot" href="https://t.me/yandexkuryer_bot?start=uz" target="_blank" rel="noopener">
+            <svg><use href="#i-tg"/></svg><span data-i18n="cta_bot">Botni ochish</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="phone rv" aria-hidden="true">
+        <div class="phone__scr">
+          <div class="phone__bar">
+            <span class="phone__ava"><svg><use href="#i-bag"/></svg></span>
+            <span><b>Yandex kuryer</b><small>bot</small></span>
+          </div>
+          <div class="chat">
+            <div class="msg" data-i18n="m1">Tilni tanlang · Выберите язык</div>
+            <div class="kb kb--2"><span>O‘zbekcha</span><span>Русский</span></div>
+            <div class="msg" data-i18n="m2"><b>Yandex Eats’da kuryer bo‘lib ishlash</b><br>Erkin jadval, har hafta to‘lov…</div>
+            <div class="kb"><span data-i18n="m3">🚀 Kuryer bo‘lish</span></div>
+            <div class="msg msg--me msg--img"><div><i></i><i></i><i></i></div></div>
+            <div class="msg" data-i18n="m4">Rahmat! Skrinshot qabul qilindi ✅</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv">
+      <h2 data-i18n="needs_h">Nima kerak bo‘ladi</h2>
+      <p data-i18n="needs_p">Maxsus ma’lumot ham, tajriba ham shart emas.</p>
+    </div>
+    <div class="needs">
+      <div class="need rv"><svg><use href="#i-18"/></svg><div><b data-i18n="n1b">18 yoshdan</b><span data-i18n="n1">Yuqori chegara yo‘q</span></div></div>
+      <div class="need rv"><svg><use href="#i-id"/></svg><div><b data-i18n="n2b">Pasport yoki ID-karta</b><span data-i18n="n2">Hujjatning asli</span></div></div>
+      <div class="need rv"><svg><use href="#i-card"/></svg><div><b data-i18n="n3b">Uzcard yoki Humo</b><span data-i18n="n3">O‘zingizniki yoki yaqinlaringizniki</span></div></div>
+      <div class="need rv"><svg><use href="#i-phone"/></svg><div><b data-i18n="n4b">Smartfon</b><span data-i18n="n4">Internet bilan</span></div></div>
+      <div class="need rv"><svg><use href="#i-doc"/></svg><div><b data-i18n="n5b">O‘zini o‘zi band qilgan maqomi</b><span data-i18n="n5">Soliq ilovasida bir necha daqiqada ochiladi</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv">
+      <h2 data-i18n="cities_h">Qaysi shaharlarda</h2>
+    </div>
+    <ul class="cities rv">
+      <li data-i18n="c1">Toshkent</li><li data-i18n="c2">Samarqand</li><li data-i18n="c3">Namangan</li><li data-i18n="c4">Farg‘ona</li>
+      <li data-i18n="c5">Andijon</li><li data-i18n="c6">Buxoro</li><li data-i18n="c7">Navoiy</li><li data-i18n="c8">Urganch</li>
+    </ul>
+    <p class="cities__note" data-i18n="cities_note">Ish faqat shahar ichida. Tumanni o‘zingiz tanlaysiz. Yotoq joy berilmaydi.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap faq">
+    <aside class="rv">
+      <h2 data-i18n="faq_h">Savollar</h2>
+      <p data-i18n="faq_p">Javob topilmadimi? Menejerga yozing — odam javob beradi.</p>
+      <a class="btn btn--y" href="https://t.me/Yandexeat01" target="_blank" rel="noopener"><svg><use href="#i-tg"/></svg>@Yandexeat01</a>
+    </aside>
+    <div class="faq__list">
+      <details class="rv" open><summary data-i18n="q1">Kuniga necha soat ishlash kerak?</summary><p data-i18n="a1">Xohlaganingizcha. Majburiy smena yo‘q: qulay vaqtda liniyaga chiqasiz va xohlagan payt to‘xtatasiz.</p></details>
+      <details class="rv"><summary data-i18n="q2">Pul qachon va qanday to‘lanadi?</summary><p data-i18n="a2">Haftada bir marta Uzcard yoki Humo kartangizga. Biz hech qanday foiz yoki komissiya olmaymiz.</p></details>
+      <details class="rv"><summary data-i18n="q3">Transportim yo‘q. Ishlay olamanmi?</summary><p data-i18n="a3">Ha. Piyoda yetkazish yoki elektrovelosipedni ijaraga olish mumkin. Toshkent va Samarqandda ijaraga chegirma bor.</p></details>
+      <details class="rv"><summary data-i18n="q4">Karta mening nomimda emas — bo‘ladimi?</summary><p data-i18n="a4">Bo‘ladi. O‘zingizning kartangiz bo‘lmasa, yaqinlaringizning Uzcard yoki Humo kartasidan foydalanishingiz mumkin.</p></details>
+      <details class="rv"><summary data-i18n="q5">O‘zini o‘zi band qilgan maqomini qanday olaman?</summary><p data-i18n="a5">Soliq ilovasida bir necha daqiqada ochiladi. Qiynalsangiz — menejer bosqichma-bosqich tushuntiradi.</p></details>
+      <details class="rv"><summary data-i18n="q6">Nega skrinshot yuborish kerak?</summary><p data-i18n="a6">Shunda menejer ro‘yxatdan o‘tganingizni ko‘radi va keyingi qadamlarda yordam beradi. Skrinshotda sana, vaqt va manzil ko‘rinishi kerak.</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final rv">
+      <h2 data-i18n="final_h">Daromadingiz — o‘zingizga bog‘liq</h2>
+      <p data-i18n="final_p">Bugun ariza qoldiring. Bot hammasini tushuntiradi, menejer esa yordam beradi.</p>
+      <a class="btn btn--ink js-bot" href="https://t.me/yandexkuryer_bot?start=uz" target="_blank" rel="noopener">
+        <svg><use href="#i-tg"/></svg><span data-i18n="cta">Telegramda boshlash</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p data-i18n="foot">Sayt Yandex Eats servisining kuryerlarni jalb qilish bo‘yicha hamkoriga tegishli va kompaniyaning rasmiy sayti emas. Ko‘rsatilgan daromad — taxminiy; u shahar, transport va bajarilgan buyurtmalar soniga bog‘liq.</p>
+    <p><span data-i18n="foot_c">Aloqa:</span> <a href="https://t.me/Yandexeat01" target="_blank" rel="noopener">@Yandexeat01</a></p>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn--ink js-bot" href="https://t.me/yandexkuryer_bot?start=uz" target="_blank" rel="noopener">
+    <svg><use href="#i-tg"/></svg><span data-i18n="cta_dock">Kuryer bo‘lish — Telegram</span>
+  </a>
+</div>
+
+<script>
+(function () {
+  var BOT = 'https://t.me/yandexkuryer_bot';
+
+  // Узбекский текст лежит прямо в разметке; здесь — только русский перевод.
+  var RU = {
+    _title: 'Станьте курьером Yandex Eats — выплаты каждую неделю, свободный график',
+    brand_sub: 'партнёр Yandex Eats',
+    cta_short: 'Оставить заявку',
+    eyebrow: 'Набор курьеров открыт',
+    h1: 'Доставляй еду — получай доход <mark>каждую неделю</mark>',
+    sub: 'Станьте курьером Yandex Eats. График выбираете сами, без собеседования и без опыта.',
+    cta: 'Начать в Telegram',
+    cta2: 'Сколько можно заработать ↓',
+    note: 'Регистрация бесплатная и занимает 3 минуты',
+    sticker: 'лет',
+    alt: 'Курьеры Yandex Eats',
+    chip_pay_s: 'Автокурьер, в месяц',
+    chip_b: 'до 15 млн',
+    chip_pay: 'сум',
+    chip_time: 'График —<br>какой удобно',
+    f1b: 'Каждую неделю', f1: 'выплата приходит на карту',
+    f2: 'мы не берём никаких процентов',
+    f3b: '3 минуты', f3: 'на регистрацию',
+    f4b: '8 городов', f4: 'по всему Узбекистану',
+    inc_tag: 'По Ташкенту',
+    inc_h: 'До <em>15 млн</em> сум в месяц',
+    inc_lead: 'Доход зависит от транспорта и числа выполненных заказов. Чем больше доставляете — тем больше получаете.',
+    t_walk: 'Пешком', t_bike: 'Велосипед', t_ebike: 'Электровелосипед', t_car: 'Автомобиль',
+    upto: 'до&nbsp;',
+    mln: 'млн',
+    inc_fine: 'В сумах, в месяц. В других городах цифры могут отличаться.',
+    perks_h: 'Почему курьеры<br>выбирают нас',
+    perks_p: 'Нет начальника, нет смен, нет обязательных часов. Открыли приложение — работа началась.',
+    p1h: 'График выбираете сами',
+    p1: 'Утром, вечером или только по выходным — когда вам удобно.',
+    p2h: 'Выплаты каждую неделю',
+    p2: 'Деньги приходят на карту Uzcard или Humo. Без комиссий и процентов.',
+    p3h: 'Без собеседования',
+    p3: 'Не нужно ехать в офис и составлять резюме. Всё онлайн.',
+    p4h: 'Студент? Подходит отлично',
+    p4: 'Работайте в свободное от учёбы время и зарабатывайте сами. Опыт не нужен — приложение всё подскажет.',
+    p5h: 'Скидка на аренду электровелосипеда',
+    p5: 'Начать можно и без своего транспорта — возьмите электровелосипед в аренду.',
+    p5pill: 'В Ташкенте и Самарканде',
+    steps_h: 'Три шага<br>до первого заказа',
+    steps_p: 'Всё через Telegram-бот. Появится вопрос — менеджер ответит в том же чате.',
+    s1h: 'Откройте бот и выберите язык',
+    s1: 'Бот коротко расскажет про условия, доход и требования.',
+    s2h: 'Заполните анкету',
+    s2: 'Кнопка «Стать курьером» открывает официальную страницу регистрации Yandex Eats. 3 минуты.',
+    s3h: 'Отправьте скриншот в бот',
+    s3: 'На нём должны быть видны дата, время и адрес. Менеджер проверит и свяжется с вами.',
+    cta_bot: 'Открыть бот',
+    m1: 'Tilni tanlang · Выберите язык',
+    m2: '<b>Работа курьером в Yandex Eats</b><br>Свободный график, выплаты каждую неделю…',
+    m3: '🚀 Стать курьером',
+    m4: 'Спасибо! Скриншот получен ✅',
+    needs_h: 'Что понадобится',
+    needs_p: 'Ни специального образования, ни опыта не нужно.',
+    n1b: 'От 18 лет', n1: 'Верхней границы нет',
+    n2b: 'Паспорт или ID-карта', n2: 'Оригинал документа',
+    n3b: 'Uzcard или Humo', n3: 'Своя или карта близких',
+    n4b: 'Смартфон', n4: 'С интернетом',
+    n5b: 'Статус самозанятого', n5: 'Оформляется в приложении Soliq за несколько минут',
+    cities_h: 'В каких городах',
+    c1: 'Ташкент', c2: 'Самарканд', c3: 'Наманган', c4: 'Фергана',
+    c5: 'Андижан', c6: 'Бухара', c7: 'Навои', c8: 'Ургенч',
+    cities_note: 'Работа только внутри города. Район выбираете сами. Жильё не предоставляется.',
+    faq_h: 'Вопросы',
+    faq_p: 'Не нашли ответ? Напишите менеджеру — отвечает человек.',
+    q1: 'Сколько часов в день нужно работать?',
+    a1: 'Сколько хотите. Обязательных смен нет: выходите на линию, когда удобно, и заканчиваете в любой момент.',
+    q2: 'Когда и как платят?',
+    a2: 'Раз в неделю на карту Uzcard или Humo. Мы не берём процентов и комиссий.',
+    q3: 'У меня нет транспорта. Могу работать?',
+    a3: 'Да. Можно доставлять пешком или взять электровелосипед в аренду. В Ташкенте и Самарканде на аренду действует скидка.',
+    q4: 'Карта оформлена не на меня — подойдёт?',
+    a4: 'Подойдёт. Если своей карты нет, можно использовать карту Uzcard или Humo кого-то из близких.',
+    q5: 'Как получить статус самозанятого?',
+    a5: 'Оформляется в приложении Soliq за несколько минут. Если не получится — менеджер объяснит по шагам.',
+    q6: 'Зачем отправлять скриншот?',
+    a6: 'Так менеджер увидит, что вы зарегистрировались, и поможет со следующими шагами. На скриншоте должны быть видны дата, время и адрес.',
+    final_h: 'Ваш доход зависит от вас',
+    final_p: 'Оставьте заявку сегодня. Бот всё объяснит, а менеджер поможет.',
+    foot: 'Сайт принадлежит партнёру сервиса Yandex Eats по привлечению курьеров и не является официальным сайтом компании. Указанный доход — ориентировочный; он зависит от города, транспорта и числа выполненных заказов.',
+    foot_c: 'Связь:',
+    cta_dock: 'Стать курьером — Telegram'
+  };
+
+  var nodes = [].slice.call(document.querySelectorAll('[data-i18n]'));
+  var UZ = { _title: document.title };
+  nodes.forEach(function (el) { UZ[el.dataset.i18n] = el.innerHTML; });
+  var img = document.querySelector('[data-i18n-alt]');
+  UZ.alt = img.alt;
+
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
+  }
+
+  function setLang(lang) {
+    var d = lang === 'ru' ? RU : UZ;
+    nodes.forEach(function (el) {
+      var v = d[el.dataset.i18n];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    img.alt = d.alt;
+    document.title = d._title;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    document.querySelectorAll('.js-bot').forEach(function (a) { a.href = BOT + '?start=' + lang; });
+    var cities = '';
+    for (var i = 1; i <= 8; i++) cities += '<span>' + d['c' + i] + '</span>';
+    document.getElementById('ticker').innerHTML = cities + cities + cities + cities;
+    store('lang', lang);
+  }
+
+  var q = new URLSearchParams(location.search).get('lang');
+  var initial = (q === 'ru' || q === 'uz') ? q
+    : store('lang') || (/^ru/i.test(navigator.language || '') ? 'ru' : 'uz');
+  setLang(initial === 'ru' ? 'ru' : 'uz');
+
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.lang); });
+  });
+
+  // появление блоков при прокрутке
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    rv.forEach(function (el) { io.observe(el); });
+  } else {
+    rv.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  var top = document.getElementById('top'), dock = document.getElementById('dock');
+  function onScroll() {
+    var y = window.scrollY;
+    top.classList.toggle('is-stuck', y > 8);
+    var nearEnd = window.innerHeight + y > document.documentElement.scrollHeight - 520;
+    dock.classList.toggle('show', y > 520 && !nearEnd);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
