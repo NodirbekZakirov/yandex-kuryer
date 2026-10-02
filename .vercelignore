@@ -1,0 +1,5 @@
+bot/.env
+bot/data.json
+serve.js
+README.md
+.claude
